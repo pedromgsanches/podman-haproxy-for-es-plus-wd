@@ -9,5 +9,5 @@
 ## Create/Start Container:
 **Run:** ./start.sh
 
-## Update haproxy.cfg nodes list:
+## Update haproxy.cfg nodes list and live reload configuration:
 **Run:** ./HAPwd/wd.sh 
