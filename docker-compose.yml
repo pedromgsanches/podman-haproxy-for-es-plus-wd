@@ -1,0 +1,17 @@
+version: "2"
+services:
+  haproxytest:
+    image: haproxy:alpine3.15
+    user: "1001"
+    userns: keep-id
+    network_mode: host
+    deploy:
+      resources:
+        limits:
+          memory: 32M
+          cpus: '6.0'
+        reservations:
+          memory: 1024M
+    volumes:
+      - ./haproxy/conf:/usr/local/etc/haproxy:Z
+      - ./haproxy/ssl:/etc/ssl/certs:Z

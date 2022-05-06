@@ -1,0 +1,23 @@
+defaults
+  timeout connect  5000
+  timeout client  10000
+  timeout server  10000
+
+global
+  log stdout format raw local0 info
+
+frontend elasticsearch
+  mode http
+  bind :9500 ssl ca-file /etc/ssl/certs/ca-cert.pem crt /etc/ssl/certs/client-cert.pem
+  acl is_delete method DELETE
+  http-request deny if is_delete
+  default_backend esservers
+
+backend esservers
+  mode http
+  option httpchk
+  http-check expect status 200
+  option forwardfor
+  balance roundrobin
+  option httpclose
+${hapdef}

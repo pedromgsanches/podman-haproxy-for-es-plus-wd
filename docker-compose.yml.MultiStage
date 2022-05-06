@@ -1,0 +1,18 @@
+version: "2"
+services:
+  haproxytest:
+    image: haproxy_server:alpine3.15
+    build:
+      image: haproxy_server:alpine3.15
+      context: haproxy
+      dockerfile: Dockerfile
+    user: "1001"
+    userns: keep-id
+    network_mode: host
+    deploy:
+      resources:
+        limits:
+          memory: 32M
+          cpus: '6.0'
+        reservations:
+          memory: 1024M
